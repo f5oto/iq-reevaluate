@@ -7,7 +7,7 @@ iq_session.cookies.set('CLM-CSRF-TOKEN', 'api')
 iq_headers = {'X-CSRF-TOKEN': 'api'}
 iq_url = "http://localhost:8070"
 stages = ["build"]
-revoke = true
+revoke = True
 
 apps = iq_session.get(f'{iq_url}/api/v2/applications').json()["applications"]
 for app in apps:
