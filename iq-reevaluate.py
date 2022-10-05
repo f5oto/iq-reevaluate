@@ -15,12 +15,16 @@ for app in apps:
 	app_id = app["id"]
 	print(f'Working on: {publicId}')
 	if revoke:
-		iq_session.put(f'{iq_url}/rest/policyViolationGrandfathering/revoke/{publicId}')
+		url = f'{iq_url}/rest/policyViolationGrandfathering/revoke/{publicId}'
+		test = iq_session.put(url, headers=iq_headers)
+		print(test.status_code)
 	reports = iq_session.get(f'{iq_url}/api/v2/reports/applications/{app_id}').json()
 	for report in reports:
-		if report["stage"] in stages:
+		stage = report["stage"]
+		if stage in stages:
+			print(f'--{stage}')
 			report_id = report["reportHtmlUrl"].split("/")[-1]
 			url = f'{iq_url}/rest/report/{publicId}/{report_id}/reevaluatePolicy'
 			result = iq_session.post(url, headers=iq_headers)
 			if result.status_code == requests.codes.ok:
-				print('done')
+				print(f'complete: {result.status_code}')
