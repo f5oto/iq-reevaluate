@@ -6,7 +6,7 @@ iq_session.auth = requests.auth.HTTPBasicAuth("admin", "admin123")
 iq_session.cookies.set('CLM-CSRF-TOKEN', 'api')
 iq_headers = {'X-CSRF-TOKEN': 'api'}
 iq_url = "http://localhost:8070"
-stages = ["build"]
+stages = ["develop","source","build","stage-release","release","operate"]
 revoke = True
 
 apps = iq_session.get(f'{iq_url}/api/v2/applications').json()["applications"]
